@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if error %}
+<div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error</strong> {{ error}}
+  </div>
+  
+{% endif %}
 <h1>Sign Up</h1>
 
-<form action="POST" action="{% url 'signup' %}">
+<form method="POST" action="{% url 'signup' %}">
 {% csrf_token %}
 <div class="form-group">
 <label for="username">Username:</label>

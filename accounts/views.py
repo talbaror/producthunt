@@ -7,14 +7,17 @@ from django.contrib import auth
 def signup(request):
     if request.method == 'POST':
         #tHE USER WANTS TO SIGN UP!
-        if request.POST['password1'] == request.POST['password2'] :
+        if request.POST['password1'] == request.POST['password2']:
             try:
                 user = User.objects.get(username=request.POST['username'])
                 return render(request, 'accounts/signup.html',{'error':'Username allready exist!'})
             except User.DoesNotExist:
-                user = User.Objects.Create_user(request.POST['username'], password=request.POST['password1'])
+                user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
                 auth.login(request,user)
                 return redirect('home')
+        else:
+            return render(request, 'accounts/signup.html',{'error':'password not match!'})
+
     else:
          #user wants to enter info   
         return render(request, 'accounts/signup.html')
