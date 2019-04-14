@@ -33,9 +33,10 @@
             </div>
            
             </div>
-{% endblock content %}
 <form method="POST" id="upvote" action="{% url 'upvote' product.id %}">
     {% csrf_token %}
     <input type="hidden">
 </form>
+
+{% endblock content %}
 
